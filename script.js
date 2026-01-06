@@ -65,4 +65,69 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  
+ // script.js
+
+// Set dynamic year in footer(s)
+document.addEventListener("DOMContentLoaded", () => {
+  const yearSpans = document.querySelectorAll("#year");
+  const currentYear = new Date().getFullYear();
+  yearSpans.forEach((span) => (span.textContent = currentYear));
+});
+
+// Mobile nav toggle
+const navToggle = document.querySelector(".nav-toggle");
+const mainNav = document.querySelector(".main-nav");
+
+if (navToggle && mainNav) {
+  navToggle.addEventListener("click", () => {
+    mainNav.classList.toggle("open");
+  });
+}
+
+// Enquiry form mailto handler for contact page
+const enquiryForm = document.getElementById("enquiryForm");
+const formStatus = document.getElementById("formStatus");
+
+if (enquiryForm) {
+  enquiryForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name")?.value || "";
+    const phone = document.getElementById("phone")?.value || "";
+    const service = document.getElementById("service")?.value || "";
+    const message = document.getElementById("message")?.value || "";
+
+    const to = "divyanshu.kr10@gmail.com";
+
+    const emailSubject =
+      service && service.trim().length > 0
+        ? `New enquiry - ${service}`
+        : "New flooring enquiry from website";
+
+    const bodyLines = [
+      "New enquiry from Prime Construction & Development International LLC website:",
+      "",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Service Required: ${service}`,
+      "",
+      "Message:",
+      message
+    ];
+
+    const mailtoLink = `mailto:${encodeURIComponent(
+      to
+    )}?subject=${encodeURIComponent(
+      emailSubject
+    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+
+    // Open user's email client with pre-filled message
+    window.location.href = mailtoLink;
+
+    if (formStatus) {
+      formStatus.textContent =
+        "Your email client should now open with the enquiry details. Please review and send.";
+    }
+  });
+}
+ 
