@@ -32,9 +32,34 @@
       </button>
     </div>
   </header>
+
 <!-- TOP BANNER SLIDESHOW -->
 <section class="top-banner">
   <div class="banner-slides">
+
+    <div class="banner-slide active">
+      <img src="./prime_construction_floor_gallery_01.jpg" alt="Industrial flooring construction work" />
+    </div>
+
+    <div class="banner-slide">
+      <img src="./prime_construction_banner_02.jpg" alt="SFRC flooring construction in progress" />
+    </div>
+
+    <div class="banner-slide">
+      <img src="./prime_construction_banner_03.jpg" alt="Concrete pouring for industrial slab" />
+    </div>
+
+    <div class="banner-slide">
+      <img src="./prime_construction_banner_04.jpg" alt="Reinforcement installation for industrial floor" />
+    </div>
+
+    <div class="banner-slide">
+      <img src="./prime_construction_banner_05.jpg" alt="Night concreting industrial flooring project" />
+    </div>
+
+    <div class="banner-slide">
+      <img src="./prime_construction_banner_06.jpg" alt="Large scale industrial concrete flooring" />
+    </div>
     <div class="banner-slide active">
       <img src="gallery1.jpg" alt="Industrial flooring project" />
     </div>
@@ -48,8 +73,6 @@
     <p>Engineered for strength, precision, and long-term reliability.</p>
   </div>
 </section>
-
-
 
   <main id="home">
     <!-- HERO -->
@@ -437,33 +460,62 @@
       </div>
     </section>
 <!-- GALLERY -->
+<!-- GALLERY (SLIDER) -->
 <section id="gallery" class="section">
   <div class="container">
     <p class="eyebrow">Gallery</p>
-    <h2>Floors that Reflect Precision.</h2>
-
+    <h2>Project Highlights</h2>
     <p class="text-large" style="max-width: 40rem; margin-top: .75rem;">
-      A glimpse of our completed industrial flooring projects — engineered for durability,
-      heavy-duty performance, and visual excellence.
+      A selection of our industrial flooring works — from preparation to final finish.
     </p>
 
-    <div class="gallery-grid">
+    <div class="gallery-slider" aria-label="Gallery slider">
+      <button class="gallery-nav prev" type="button" aria-label="Previous image">‹</button>
 
-      <figure class="gallery-item">
-        <img src="gallery1.jpg"
-             alt="Polished industrial concrete floor in a modern warehouse interior"
-             loading="lazy" />
-      </figure>
+      <div class="gallery-viewport">
+        <div class="gallery-track">
+          <!-- Add/Remove slides here -->
+          <div class="gallery-slide">
+            <img src="./prime_construction_floor_gallery_01.jpg" alt="Industrial flooring construction work" loading="lazy" />
+          </div>
 
-      <figure class="gallery-item">
-        <img src="gallery2.jpg"
-             alt="Epoxy industrial flooring with yellow safety lane markings"
-             loading="lazy" />
-      </figure>
+          <div class="gallery-slide">
+            <img src="./prime_construction_banner_02.jpg" alt="SFRC flooring construction in progress" loading="lazy" />
+          </div>
 
+          <div class="gallery-slide">
+            <img src="./prime_construction_banner_03.jpg" alt="Concrete surface finishing work" loading="lazy" />
+          </div>
+
+          <div class="gallery-slide">
+            <img src="./prime_construction_banner_04.jpg" alt="Concrete pouring for industrial slab" loading="lazy" />
+          </div>
+
+          <div class="gallery-slide">
+            <img src="./prime_construction_banner_05.jpg" alt="Reinforcement installation for industrial floor" loading="lazy" />
+          </div>
+
+          <div class="gallery-slide">
+            <img src="./prime_construction_banner_06.jpg" alt="Large scale industrial concrete flooring" loading="lazy" />
+          </div>
+
+          <!-- OPTIONAL: If you still want the earlier warehouse finish images too, add them like this: -->
+          
+          <div class="gallery-slide">
+            <img src="./gallery1.jpg" alt="Polished industrial floor in warehouse" loading="lazy" />
+          </div>
+          <div class="gallery-slide">
+            <img src="./gallery2.jpg" alt="Epoxy floor with yellow safety lines" loading="lazy" />
+          </div>
+         
+        </div>
+      </div>
+
+      <button class="gallery-nav next" type="button" aria-label="Next image">›</button>
     </div>
   </div>
 </section>
+
 
     <!-- NEWS -->
     <section id="news" class="section light-section">

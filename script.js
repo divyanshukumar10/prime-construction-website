@@ -10,6 +10,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.querySelector(".nav-toggle");
   const mainNav = document.querySelector(".main-nav");
 
+  // Gallery Slider (arrows)
+const galleryTrack = document.querySelector(".gallery-track");
+const gallerySlides = document.querySelectorAll(".gallery-slide");
+const galleryPrev = document.querySelector(".gallery-nav.prev");
+const galleryNext = document.querySelector(".gallery-nav.next");
+
+if (galleryTrack && gallerySlides.length > 0 && galleryPrev && galleryNext) {
+  let gIndex = 0;
+
+  const updateGallery = () => {
+    galleryTrack.style.transform = `translateX(-${gIndex * 100}%)`;
+  };
+
+  galleryPrev.addEventListener("click", () => {
+    gIndex = (gIndex - 1 + gallerySlides.length) % gallerySlides.length;
+    updateGallery();
+  });
+
+  galleryNext.addEventListener("click", () => {
+    gIndex = (gIndex + 1) % gallerySlides.length;
+    updateGallery();
+  });
+
+  // Optional: keyboard support when user is on page
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") galleryPrev.click();
+    if (e.key === "ArrowRight") galleryNext.click();
+  });
+
+  updateGallery();
+}
+
+
   if (navToggle && mainNav) {
     navToggle.addEventListener("click", () => {
       mainNav.classList.toggle("open");
