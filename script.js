@@ -1,197 +1,83 @@
 // script.js
 
-// Dynamic year
 document.addEventListener("DOMContentLoaded", () => {
-    const yearSpans = document.querySelectorAll("#year");
-    const currentYear = new Date().getFullYear();
-    yearSpans.forEach((span) => (span.textContent = currentYear));
-  });
-  
+  // Dynamic year
+  const yearSpans = document.querySelectorAll("#year");
+  const currentYear = new Date().getFullYear();
+  yearSpans.forEach((span) => (span.textContent = currentYear));
+
   // Mobile nav toggle
   const navToggle = document.querySelector(".nav-toggle");
   const mainNav = document.querySelector(".main-nav");
-  
+
   if (navToggle && mainNav) {
     navToggle.addEventListener("click", () => {
       mainNav.classList.toggle("open");
     });
   }
-  
-  // Enquiry form mailto handler
+
+  // Banner slideshow
+  const bannerSlides = document.querySelectorAll(".banner-slide");
+  if (bannerSlides.length > 0) {
+    let current = 0;
+    // Ensure the first slide is active
+    bannerSlides.forEach((s) => s.classList.remove("active"));
+    bannerSlides[0].classList.add("active");
+
+    if (bannerSlides.length > 1) {
+      setInterval(() => {
+        bannerSlides[current].classList.remove("active");
+        current = (current + 1) % bannerSlides.length;
+        bannerSlides[current].classList.add("active");
+      }, 5000); // change every 5 seconds
+    }
+  }
+
+  // Enquiry form (contact page) - mailto + thank-you card
   const enquiryForm = document.getElementById("enquiryForm");
-  const formStatus = document.getElementById("formStatus");
-  
+  const thankYouCard = document.getElementById("thankYou");
+
   if (enquiryForm) {
     enquiryForm.addEventListener("submit", (e) => {
       e.preventDefault();
-  
+
       const name = document.getElementById("name")?.value || "";
-      const email = document.getElementById("email")?.value || "";
       const phone = document.getElementById("phone")?.value || "";
-      const company = document.getElementById("company")?.value || "";
       const service = document.getElementById("service")?.value || "";
-      const subject = document.getElementById("subject")?.value || "";
       const message = document.getElementById("message")?.value || "";
-  
+
       const to = "divyanshu.kr10@gmail.com";
-  
+
       const emailSubject =
-        subject.trim() || "New Flooring Enquiry - Prime Construction Website";
-  
+        service && service.trim().length > 0
+          ? `New enquiry - ${service}`
+          : "New flooring enquiry from website";
+
       const bodyLines = [
         "New enquiry from Prime Construction & Development International LLC website:",
         "",
         `Name: ${name}`,
-        `Email: ${email}`,
         `Phone: ${phone}`,
-        `Company: ${company}`,
-        `Service Type: ${service}`,
+        `Service Required: ${service}`,
         "",
-        "Project Details:",
-        message
+        "Message:",
+        message,
       ];
-  
+
       const mailtoLink = `mailto:${encodeURIComponent(
         to
       )}?subject=${encodeURIComponent(
         emailSubject
       )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-  
+
       window.location.href = mailtoLink;
-  
-      if (formStatus) {
-        formStatus.textContent =
-          "Your email client should now open with the enquiry. Please review and send.";
+
+      // Show thank-you and hide form
+      enquiryForm.reset();
+      if (thankYouCard) {
+        enquiryForm.style.display = "none";
+        thankYouCard.hidden = false;
       }
     });
   }
- // script.js
-
-// Set dynamic year in footer(s)
-// script.js
-
-// Set dynamic year in footer(s)
-document.addEventListener("DOMContentLoaded", () => {
-  const yearSpans = document.querySelectorAll("#year");
-  const currentYear = new Date().getFullYear();
-  yearSpans.forEach((span) => (span.textContent = currentYear));
 });
-
-// Mobile nav toggle
-const navToggle = document.querySelector(".nav-toggle");
-const mainNav = document.querySelector(".main-nav");
-
-if (navToggle && mainNav) {
-  navToggle.addEventListener("click", () => {
-    mainNav.classList.toggle("open");
-  });
-}
-
-// Enquiry form mailto handler for contact page
-const enquiryForm = document.getElementById("enquiryForm");
-const thankYouCard = document.getElementById("thankYou");
-
-if (enquiryForm) {
-  enquiryForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name")?.value || "";
-    const phone = document.getElementById("phone")?.value || "";
-    const service = document.getElementById("service")?.value || "";
-    const message = document.getElementById("message")?.value || "";
-
-    const to = "divyanshu.kr10@gmail.com";
-
-    const emailSubject =
-      service && service.trim().length > 0
-        ? `New enquiry - ${service}`
-        : "New flooring enquiry from website";
-
-    const bodyLines = [
-      "New enquiry from Prime Construction & Development International LLC website:",
-      "",
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Service Required: ${service}`,
-      "",
-      "Message:",
-      message
-    ];
-
-    const mailtoLink = `mailto:${encodeURIComponent(
-      to
-    )}?subject=${encodeURIComponent(
-      emailSubject
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-
-    // Open user's email client with pre-filled message
-    window.location.href = mailtoLink;
-
-    // Show thank-you message in the form area
-    enquiryForm.reset();
-    enquiryForm.style.display = "none";
-
-    if (thankYouCard) {
-      thankYouCard.hidden = false;
-    }
-  });
-}
-
-
-// Mobile nav toggle
-const navToggle = document.querySelector(".nav-toggle");
-const mainNav = document.querySelector(".main-nav");
-
-if (navToggle && mainNav) {
-  navToggle.addEventListener("click", () => {
-    mainNav.classList.toggle("open");
-  });
-}
-
-// Enquiry form mailto handler for contact page
-const enquiryForm = document.getElementById("enquiryForm");
-const formStatus = document.getElementById("formStatus");
-
-if (enquiryForm) {
-  enquiryForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name")?.value || "";
-    const phone = document.getElementById("phone")?.value || "";
-    const service = document.getElementById("service")?.value || "";
-    const message = document.getElementById("message")?.value || "";
-
-    const to = "divyanshu.kr10@gmail.com";
-
-    const emailSubject =
-      service && service.trim().length > 0
-        ? `New enquiry - ${service}`
-        : "New flooring enquiry from website";
-
-    const bodyLines = [
-      "New enquiry from Prime Construction & Development International LLC website:",
-      "",
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Service Required: ${service}`,
-      "",
-      "Message:",
-      message
-    ];
-
-    const mailtoLink = `mailto:${encodeURIComponent(
-      to
-    )}?subject=${encodeURIComponent(
-      emailSubject
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
-
-    // Open user's email client with pre-filled message
-    window.location.href = mailtoLink;
-
-    if (formStatus) {
-      formStatus.textContent =
-        "Your email client should now open with the enquiry details. Please review and send.";
-    }
-  });
-}
- 
