@@ -79,7 +79,9 @@ if (galleryTrack && gallerySlides.length > 0 && galleryPrev && galleryNext) {
       const service = document.getElementById("service")?.value || "";
       const message = document.getElementById("message")?.value || "";
 
-      const to = "divyanshu.kr10@gmail.com";
+      const to = "info@mypcdi.com";
+      const cc = "sushil@mypcdi.com";
+
 
       const emailSubject =
         service && service.trim().length > 0
@@ -99,9 +101,11 @@ if (galleryTrack && gallerySlides.length > 0 && galleryPrev && galleryNext) {
 
       const mailtoLink = `mailto:${encodeURIComponent(
         to
-      )}?subject=${encodeURIComponent(
+      )}?cc=${encodeURIComponent(
+        cc
+      )}&subject=${encodeURIComponent(
         emailSubject
-      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+      )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;      
 
       window.location.href = mailtoLink;
 
