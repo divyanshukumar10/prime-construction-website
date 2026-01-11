@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       // ✅ Replace these with your real IDs from EmailJS
-      const EMAILJS_SERVICE_ID = "service_iioahwn";
+      const EMAILJS_SERVICE_ID = "service_bg0xg9g";
       const EMAILJS_TEMPLATE_ID = "template_23zd8ss";
 
       const name = document.getElementById("name")?.value?.trim() || "";
