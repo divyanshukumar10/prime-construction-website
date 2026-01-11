@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateGallery();
     });
 
-    // Keyboard support
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") galleryPrev.click();
       if (e.key === "ArrowRight") galleryNext.click();
@@ -52,8 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bannerSlides = document.querySelectorAll(".banner-slide");
   if (bannerSlides.length > 0) {
     let current = 0;
-
-    // Ensure the first slide is active
     bannerSlides.forEach((s) => s.classList.remove("active"));
     bannerSlides[0].classList.add("active");
 
@@ -66,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Enquiry form (contact page) - EmailJS direct send + thank-you card
+  // Enquiry form (contact page) - direct send via EmailJS
   const enquiryForm = document.getElementById("enquiryForm");
   const thankYouCard = document.getElementById("thankYou");
 
@@ -74,53 +71,37 @@ document.addEventListener("DOMContentLoaded", () => {
     enquiryForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      // NOTE:
-      // You MUST add EmailJS to contact.html:
-      // <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-      // <script>emailjs.init("YOUR_PUBLIC_KEY");</script>
-      //
-      // And replace these values:
+      // ✅ Replace these with your real IDs from EmailJS
       const EMAILJS_SERVICE_ID = "service_iioahwn";
       const EMAILJS_TEMPLATE_ID = "template_23zd8ss";
 
-      const name = document.getElementById("name")?.value || "";
-      const phone = document.getElementById("phone")?.value || "";
-      const service = document.getElementById("service")?.value || "";
-      const message = document.getElementById("message")?.value || "";
+      const name = document.getElementById("name")?.value?.trim() || "";
+      const phone = document.getElementById("phone")?.value?.trim() || "";
+      const service = document.getElementById("service")?.value?.trim() || "";
+      const message = document.getElementById("message")?.value?.trim() || "";
 
-      const emailSubject =
-        service && service.trim().length > 0
-          ? `New enquiry - ${service}`
-          : "New flooring enquiry from website";
+      // Basic validation (extra safety)
+      if (!name || !phone || !service || !message) {
+        alert("Please fill all required fields.");
+        return;
+      }
 
-      const templateParams = {
-        // These fields should match your EmailJS template variables
-        name,
-        phone,
-        service,
-        message,
-        subject: emailSubject,
-
-        // If your template supports "to" and "cc", keep these.
-        // Otherwise set To/CC inside the EmailJS template settings.
-        to_email: "info@mypcdi.com",
-        cc_email: "sushil@mypcdi.com",
-      };
-
-      // Guard: if EmailJS isn't loaded, show a helpful error
-      if (typeof window.emailjs === "undefined") {
+      // EmailJS must be loaded + initialized in contact.html
+      if (!window.emailjs || typeof window.emailjs.send !== "function") {
         alert(
-          "Email service not configured. Please add EmailJS script + init in contact.html."
+          "Email service is not configured. Please ensure EmailJS is added and initialized in contact.html."
         );
         return;
       }
 
-      // Optional: disable button to avoid multiple clicks
       const submitBtn = enquiryForm.querySelector('button[type="submit"]');
+      const oldBtnText = submitBtn ? submitBtn.textContent : "";
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending...";
       }
+
+      const templateParams = { name, phone, service, message };
 
       window.emailjs
         .send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
@@ -134,13 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         })
         .catch((err) => {
-          console.error("EmailJS send failed:", err);
+          console.error("EmailJS error:", err);
           alert("Failed to send enquiry. Please try again.");
         })
         .finally(() => {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = "Submit";
+            submitBtn.textContent = oldBtnText || "Submit";
           }
         });
     });
